@@ -1,0 +1,28 @@
+/* Setup */
+@import 'setup/vars.scss';
+@import 'setup/typography.scss';
+
+/* Base */
+@import 'base/base.scss';
+@import 'base/helpers.scss';
+@import 'base/layout.scss';
+
+/* MEDIA QUERIES */
+@import 'setup/mq.scss';
+
+
+/* =============== Components ================ */
+/* App-Cmps */
+@import 'cmps/app/root.scss';
+@import 'cmps/app/app.scss';
+
+@import 'cmps/app/AppHeader.scss';
+
+
+/* reusables */
+@import 'reusables/flash-msg.scss';
+@import 'reusables/hamburger-icon.scss';
+@import 'reusables/modal.scss';
+@import 'reusables/loader.scss';
+
+/* Pages */
