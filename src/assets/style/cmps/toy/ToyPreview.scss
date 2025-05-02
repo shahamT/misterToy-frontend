@@ -1,0 +1,22 @@
+.ToyPreview {
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+
+    padding: 16px;
+
+    background-color: bisque;
+
+    .toy-name {
+        font-weight: 600;
+        font-size: 20px;
+    }
+
+    .labels-container {
+        display: flex;
+        gap: 16px;
+    }
+
+}

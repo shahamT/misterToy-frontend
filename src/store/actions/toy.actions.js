@@ -18,13 +18,16 @@ export function loadToys() {
         })
 }
 
-export function removeToy(toyId) {
-    return toyService.remove(toyId)
+export function removeToy(toy) {
+    store.dispatch({ type: REMOVE_TOY, toyId: toy._id })
+    return toyService.remove(toy._id)
         .then(() => {
-            store.dispatch({ type: REMOVE_TOY, toyId })
+            showSuccessMsg('toy succesfully deleted')
         })
         .catch(err => {
             console.log('toy action -> Cannot remove toy', err)
+            showErrorMsg('toy could not be deleted')
+            store.dispatch({ type: ADD_TOY, toy })
             throw err
         })
 }

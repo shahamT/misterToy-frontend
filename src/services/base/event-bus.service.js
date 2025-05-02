@@ -36,22 +36,3 @@ export function showErrorMsg(txt) {
 
 window.showSuccessMsg = showSuccessMsg
 window.showErrorMsg = showErrorMsg
-
-////////////////////////////////////////////////////
-
-export function showDialog({ content, backgroundColor = 'black', onConfirm, onCancel, onClose }) {
-    eventBusService.emit('show-dialog', {
-      content,
-      backgroundColor,
-      onConfirm,
-      onCancel,
-      onClose
-    })
-  }
-  
-  export function closeDialog(reason) {
-    eventBusService.emit('close-dialog', reason)
-  }
-  
-  window.showDialog = showDialog
-  window.closeDialog = closeDialog

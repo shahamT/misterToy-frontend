@@ -1,3 +1,5 @@
+import './Loader.scss'
+
 export function Loader({
   size = 1,
   width = 3,

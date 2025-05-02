@@ -9,8 +9,9 @@ export function AppHeader(props) {
         <header className="app-header">
                     <MainLogo />
                 <nav className="app-nav">
-                    <NavLink to="/" >Home</NavLink>
-                    <NavLink to="/about" >About</NavLink>
+                    <NavLink to="/" ><div className="clickable clear size-40">Home</div></NavLink>
+                    <NavLink to="/toy" ><div className="clickable clear size-40">Toys</div></NavLink>
+                    <NavLink to="/about" ><div className="clickable clear size-40">About</div></NavLink>
                 </nav>
         </header>
     )

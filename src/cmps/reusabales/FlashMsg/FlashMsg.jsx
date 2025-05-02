@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react"
-import { eventBusService } from "../../services/base/event-bus.service.js"
+import { eventBusService } from "../../../services/base/event-bus.service.js"
+import './FlashMsg.scss'
 
 
 export function FlashMsg() {

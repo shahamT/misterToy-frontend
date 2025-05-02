@@ -1,15 +1,16 @@
-import { httpService } from "../src/services/base/http.service"
-import { storageService } from "../src/services/base/async-storage.service"
+import { httpService } from "./base/http.service"
+import { storageService } from "./base/async-storage.service"
+import { loadFromStorage, saveToStorage } from "./base/util.service"
 
 
 
 export const toyService = {
-    query,
-    getById,
-    save,
-    remove,
-    getEmptyToy,
-    getDefaultFilter,
+  query,
+  getById,
+  save,
+  remove,
+  getEmptyToy,
+  getDefaultFilter,
 }
 
 // ===========================================================================
@@ -55,143 +56,139 @@ export const toyService = {
 
 
 const STORAGE_KEY = 'toyDB'
-const labels = ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle', 
-    'Outdoor', 'Battery Powered'] 
+const labels = ['On wheels', 'Box game', 'Art', 'Baby', 'Doll', 'Puzzle',
+  'Outdoor', 'Battery Powered']
 
 _createToys()
 
 function query(filterBy = {}) {
-    return storageService.query(STORAGE_KEY)
-        .then(toys => {
-            if (filterBy.txt) {
-                const regExp = new RegExp(filterBy.txt, 'i')
-                return toys.filter(toy =>
-                    regExp.test(toy.vendor)
-                )
-            }
-        })
+  return storageService.query(STORAGE_KEY)
+    .then(toys => {
+      return toys
+    })
 }
 
 function getById(toyId) {
-    return storageService.get(STORAGE_KEY, toyId)
+  return storageService.get(STORAGE_KEY, toyId)
 }
 
 function remove(toyId) {
-    return storageService.remove(STORAGE_KEY, toyId)
+  console.log("toyId: ", toyId)
+  return storageService.remove(STORAGE_KEY, toyId)
 }
 
 
 function save(toy) {
-    if (toy._id) {
-        return storageService.put(STORAGE_KEY, toy)
-    } else {
-        return storageService.post(STORAGE_KEY, toy)
-    }
+  if (toy._id) {
+    return storageService.put(STORAGE_KEY, toy)
+  } else {
+    return storageService.post(STORAGE_KEY, toy)
+  }
 }
 
 function _createToys() {
-    if (!loadFromStorage(MAIL_DB_KEY) || loadFromStorage(MAIL_DB_KEY).lentgh === 0) {
-        const toys = _createDemoToys()
-        saveToStorage(MAIL_DB_KEY, toys)
-    }
+  if (!loadFromStorage(STORAGE_KEY) || loadFromStorage(STORAGE_KEY).lentgh === 0) {
+    const toys = _createDemoToys()
+    saveToStorage(STORAGE_KEY, toys)
+  }
 }
 
 function _createDemoToys() {
-    const toys = [
-        {
-    _id: 't101',
-    name: 'Talking Doll',
-    imgUrl: 'hardcoded-url-for-now',
-    price: 123,
-    labels: ['Doll', 'Battery Powered', 'Baby'],
-    createdAt: 1631031801011,
-    inStock: true,
-  },
-  {
-    _id: 't102',
-    name: 'Race Car',
-    imgUrl: 'hardcoded-url-for-now',
-    price: 89,
-    labels: ['On wheels', 'Battery Powered', 'Outdoor'],
-    createdAt: 1631032802011,
-    inStock: true,
-  },
-  {
-    _id: 't103',
-    name: 'Paint Set',
-    imgUrl: 'hardcoded-url-for-now',
-    price: 45,
-    labels: ['Art', 'Baby'],
-    createdAt: 1631033803011,
-    inStock: false,
-  },
-  {
-    _id: 't104',
-    name: 'Puzzle Master',
-    imgUrl: 'hardcoded-url-for-now',
-    price: 60,
-    labels: ['Puzzle', 'Box game'],
-    createdAt: 1631034804011,
-    inStock: true,
-  },
-  {
-    _id: 't105',
-    name: 'Outdoor Explorer Kit',
-    imgUrl: 'hardcoded-url-for-now',
-    price: 99,
-    labels: ['Outdoor', 'Box game'],
-    createdAt: 1631035805011,
-    inStock: true,
-  },
-  {
-    _id: 't106',
-    name: 'Building Blocks',
-    imgUrl: 'hardcoded-url-for-now',
-    price: 70,
-    labels: ['Box game', 'Baby'],
-    createdAt: 1631036806011,
-    inStock: false,
-  },
-  {
-    _id: 't107',
-    name: 'Battery Robot',
-    imgUrl: 'hardcoded-url-for-now',
-    price: 150,
-    labels: ['Battery Powered', 'On wheels'],
-    createdAt: 1631037807011,
-    inStock: true,
-  },
-  {
-    _id: 't108',
-    name: 'Sketch Board',
-    imgUrl: 'hardcoded-url-for-now',
-    price: 55,
-    labels: ['Art'],
-    createdAt: 1631038808011,
-    inStock: true,
-  },
-  {
-    _id: 't109',
-    name: 'Stuffed Bear',
-    imgUrl: 'hardcoded-url-for-now',
-    price: 35,
-    labels: ['Baby', 'Doll'],
-    createdAt: 1631039809011,
-    inStock: true,
-  },
-  {
-    _id: 't110',
-    name: 'Obstacle Racer',
-    imgUrl: 'hardcoded-url-for-now',
-    price: 120,
-    labels: ['On wheels', 'Outdoor', 'Battery Powered'],
-    createdAt: 1631040810011,
-    inStock: false,
-  }
-    ]
+  const toys = [
+    {
+      _id: 't101',
+      name: 'Talking Doll',
+      imgUrl: 'https://pl.nice-cdn.com/upload/image/product/large/default/toy-place-bear-100cm-1-st-819856-en.jpg',
+      price: 123,
+      labels: ['Doll', 'Battery Powered', 'Baby'],
+      createdAt: 1631031801011,
+      inStock: true,
+    },
+    {
+      _id: 't102',
+      name: 'Race Car',
+      imgUrl: 'https://pl.nice-cdn.com/upload/image/product/large/default/toy-place-bear-100cm-1-st-819856-en.jpg',
+      price: 89,
+      labels: ['On wheels', 'Battery Powered', 'Outdoor'],
+      createdAt: 1631032802011,
+      inStock: true,
+    },
+    {
+      _id: 't103',
+      name: 'Paint Set',
+      imgUrl: 'https://pl.nice-cdn.com/upload/image/product/large/default/toy-place-bear-100cm-1-st-819856-en.jpg',
+      price: 45,
+      labels: ['Art', 'Baby'],
+      createdAt: 1631033803011,
+      inStock: false,
+    },
+    {
+      _id: 't104',
+      name: 'Puzzle Master',
+      imgUrl: 'https://pl.nice-cdn.com/upload/image/product/large/default/toy-place-bear-100cm-1-st-819856-en.jpg',
+      price: 60,
+      labels: ['Puzzle', 'Box game'],
+      createdAt: 1631034804011,
+      inStock: true,
+    },
+    {
+      _id: 't105',
+      name: 'Outdoor Explorer Kit',
+      imgUrl: 'https://pl.nice-cdn.com/upload/image/product/large/default/toy-place-bear-100cm-1-st-819856-en.jpg',
+      price: 99,
+      labels: ['Outdoor', 'Box game'],
+      createdAt: 1631035805011,
+      inStock: true,
+    },
+    {
+      _id: 't106',
+      name: 'Building Blocks',
+      imgUrl: 'https://pl.nice-cdn.com/upload/image/product/large/default/toy-place-bear-100cm-1-st-819856-en.jpg',
+      price: 70,
+      labels: ['Box game', 'Baby'],
+      createdAt: 1631036806011,
+      inStock: false,
+    },
+    {
+      _id: 't107',
+      name: 'Battery Robot',
+      imgUrl: 'https://pl.nice-cdn.com/upload/image/product/large/default/toy-place-bear-100cm-1-st-819856-en.jpg',
+      price: 150,
+      labels: ['Battery Powered', 'On wheels'],
+      createdAt: 1631037807011,
+      inStock: true,
+    },
+    {
+      _id: 't108',
+      name: 'Sketch Board',
+      imgUrl: 'https://pl.nice-cdn.com/upload/image/product/large/default/toy-place-bear-100cm-1-st-819856-en.jpg',
+      price: 55,
+      labels: ['Art'],
+      createdAt: 1631038808011,
+      inStock: true,
+    },
+    {
+      _id: 't109',
+      name: 'Stuffed Bear',
+      imgUrl: 'https://pl.nice-cdn.com/upload/image/product/large/default/toy-place-bear-100cm-1-st-819856-en.jpg',
+      price: 35,
+      labels: ['Baby', 'Doll'],
+      createdAt: 1631039809011,
+      inStock: true,
+    },
+    {
+      _id: 't110',
+      name: 'Obstacle Racer',
+      imgUrl: 'https://pl.nice-cdn.com/upload/image/product/large/default/toy-place-bear-100cm-1-st-819856-en.jpg',
+      price: 120,
+      labels: ['On wheels', 'Outdoor', 'Battery Powered'],
+      createdAt: 1631040810011,
+      inStock: false,
+    }
+  ]
 
-    return toys
-} 
+  return toys
+}
 
 // ===========================================================================
 // ============================ SYNCED FUNCTIONS =============================
@@ -199,19 +196,22 @@ function _createDemoToys() {
 
 
 function getEmptyToy() { //TODO edit this
-    return {
-        key1: '',
-        key2: '',
-        key3: '',
-    }
+  return {
+    name: '',
+    imgUrl: 'https://pl.nice-cdn.com/upload/image/product/large/default/toy-place-bear-100cm-1-st-819856-en.jpg',
+    price: 0,
+    labels: ['Doll', 'Battery Powered', 'Baby'],
+    createdAt: null,
+    inStock: true,
+  }
 }
 
 function getDefaultFilter() { //TODO edit this
-    return {
-        txt: '',
-        filter1: '',
-        filter2: ''
-    }
+  return {
+    txt: '',
+    filter1: '',
+    filter2: ''
+  }
 }
 
 

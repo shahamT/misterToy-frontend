@@ -1,11 +1,24 @@
 .main-logo-wraper {
-    min-width: fit-content;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+
+    min-width: max-content;
     justify-self: start;
     cursor: pointer;
-}
 
-.main-logo {
-    height: 50px;
-    object-fit: contain;
 
+    .main-logo {
+        height: 50px;
+        object-fit: contain;
+    }
+
+    .logo-title {
+        font-size: 26px;
+
+        span {
+            font-weight: 400;
+        }
+    }
 }

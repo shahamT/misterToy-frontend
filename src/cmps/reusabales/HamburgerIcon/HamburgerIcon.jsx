@@ -1,3 +1,6 @@
+import './HamburgerIcon.scss'
+
+
 export function HamburgerIcon({ isOpen, color = '#000', size = 1, onClick }) {
     
     return (
