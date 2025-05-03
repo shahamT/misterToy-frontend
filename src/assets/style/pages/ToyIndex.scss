@@ -2,10 +2,17 @@
     padding-inline: 24px;
     padding-block: 16px;
 
+    .header {
+        display: flex;
+        justify-content: space-between;
 
-    h2 {
-        font-size: 22px;
+
+        h2 {
+            font-size: 22px;
+        }
+
     }
+
 
 
 }

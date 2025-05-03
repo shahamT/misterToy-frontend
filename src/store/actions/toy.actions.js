@@ -1,7 +1,8 @@
 import { toyService } from "../../services/toy.service.js";
-import { ADD_TOY, REMOVE_TOY, SET_TOYS, SET_TOYS_FILTER_BY, SET_TOYS_IS_LOADING, UPDATE_TOY } from "../reducers/toy.reducer.js";
+import { ADD_TOY, REMOVE_TOY, SET_TOY_ACTION_IS_LOADING, SET_TOYS, SET_TOYS_FILTER_BY, SET_TOYS_IS_LOADING, UPDATE_TOY } from "../reducers/toy.reducer.js";
 import { store } from "../store.js";
 
+// ==== Load ====
 export function loadToys() {
     const filterBy = store.getState().toyModule.filterBy
     store.dispatch({ type: SET_TOYS_IS_LOADING, isLoading: true })
@@ -18,7 +19,9 @@ export function loadToys() {
         })
 }
 
+// ==== Remove ====
 export function removeToy(toy) {
+    store.dispatch({ type: SET_TOY_ACTION_IS_LOADING, isLoading: true })
     store.dispatch({ type: REMOVE_TOY, toyId: toy._id })
     return toyService.remove(toy._id)
         .then(() => {
@@ -30,13 +33,16 @@ export function removeToy(toy) {
             store.dispatch({ type: ADD_TOY, toy })
             throw err
         })
+        .finally(() => {
+            store.dispatch({ type: SET_TOY_ACTION_IS_LOADING, isLoading: false })
+        })
 }
 
+// ==== Save ====
 export function saveToy(toy) {
     const type = toy._id ? UPDATE_TOY : ADD_TOY
     return toyService.save(toy)
         .then(savedToy => {
-            console.log('savedToy:', savedToy)
             store.dispatch({ type, toy: savedToy })
             return savedToy
         })
@@ -46,6 +52,7 @@ export function saveToy(toy) {
         })
 }
 
+// ==== Set FilterBy ====
 export function setFilterBy(filterBy) {
     store.dispatch({ type: SET_TOYS_FILTER_BY, filterBy })
 }

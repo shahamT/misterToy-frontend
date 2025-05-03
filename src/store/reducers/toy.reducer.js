@@ -8,11 +8,13 @@ export const UPDATE_TOY = 'UPDATE_TOY'
 
 export const SET_TOYS_FILTER_BY = 'SET_TOYS_FILTER_BY'
 export const SET_TOYS_IS_LOADING = 'SET_TOYS_IS_LOADING'
+export const SET_TOY_ACTION_IS_LOADING = 'SET_TOY_ACTION_IS_LOADING'
 
 const initialState = {
     toys: [],
-    isLoading: false,
     filterBy: toyService.getDefaultFilter(),
+    isToyLoading: false,
+    isToyActionLoading: false,
 }
 
 export function toyReducer(state = initialState, action = {}) {
@@ -51,6 +53,11 @@ export function toyReducer(state = initialState, action = {}) {
             return {
                 ...state,
                 isLoading: action.isLoading
+            }
+        case SET_TOY_ACTION_IS_LOADING:
+            return {
+                ...state,
+                isToyActionLoading: action.isLoading
             }
 
         default: return state

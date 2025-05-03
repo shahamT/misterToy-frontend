@@ -103,7 +103,7 @@ export function useEscapeToClose(isActive, onClose) {
 
 
 // export function openGlobalModal(content) {
-//   store.dispatch({ type: OPEN_GLOBAL_MODAL, content })
+  // store.dispatch({ type: OPEN_GLOBAL_MODAL, content })
 // }
 
 // export function closeGlobalModal() {

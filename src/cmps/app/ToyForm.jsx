@@ -7,9 +7,9 @@ export function ToyForm({ action = 'add', toy }) {
     const [toyToEdit, handleChange, resetForm] = useControlledForm(toy || toyService.getEmptyToy())
 
     function onSave() {
-        if (action === 'add') {
-            toyToEdit.createdAt = Date.now
-        }
+        //default img
+        if (!toyToEdit.imgUrl) toyToEdit.imgUrl = 'https://pl.nice-cdn.com/upload/image/product/large/default/toy-place-bear-100cm-1-st-819856-en.jpg'
+
         saveToy(toyToEdit)
             .then(() => {
                 closeGlobalModal()

@@ -42,16 +42,18 @@ export function ToyIndex({ /* prop1, prop2 */ }) {
 
 
     function onAddToy() {
-        openGlobalModal(<ToyForm action='add'/>)
+        openGlobalModal(<ToyForm action='add' />)
     }
 
     // if (!data) return <div>Loading...</div>
     return (
         <section className="ToyIndex">
-            <h2>Our toys</h2>
+            <div className="header">
+                <h2>Our toys</h2>
 
-            <div className="clickable filled size-40 icon-start i-Add"
-                onClick={onAddToy}>New toy
+                <div className="clickable filled size-40 icon-start i-Add"
+                    onClick={onAddToy}>New toy
+                </div>
             </div>
 
             <ToyFilter />
